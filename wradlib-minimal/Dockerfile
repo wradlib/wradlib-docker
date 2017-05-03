@@ -1,18 +1,13 @@
-FROM centos:6
+FROM centos:7
 
 MAINTAINER wradlib <wradlib@wradlib.org>
 
 USER root
 
 # update und install needed system dependencies
-RUN yum update -y && \
-    yum install -y libXext libXrender libSM tk libX11-devel
-
-# install Tini
-RUN curl -LO https://github.com/krallin/tini/releases/download/v0.10.0/tini && \
-    echo "1361527f39190a7338a0b434bd8c88ff7233ce7b9a4876f3315c22fce7eca1b0 *tini" | sha256sum -c - && \
-    mv tini /usr/local/bin/tini && \
-    chmod +x /usr/local/bin/tini
+RUN yum update -y
+RUN yum install -y bzip2 mesa-libGL mesa-dri-drivers qt5-qtbase-gui xterm Xvfb
+RUN yum clean all
 
 # configure environment
 ENV CONDA_DIR=/opt/conda
@@ -44,8 +39,5 @@ RUN conda create --yes -n wradlib \
 RUN source activate wradlib && \
     pip install https://github.com/wradlib/wradlib/archive/master.zip
 
-EXPOSE 8888 8889
-
 # configure startup
-ENTRYPOINT ["tini", "--"]
-CMD ["/bin/bash"]
+CMD ["/usr/bin/xterm"]
