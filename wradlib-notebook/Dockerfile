@@ -1,4 +1,4 @@
-FROM wradlib-minimal
+FROM wradlib/wradlib-docker:wradlib-minimal
 
 MAINTAINER wradlib <wradlib@wradlib.org>
 

@@ -37,7 +37,7 @@ RUN conda create --yes -n wradlib \
 
 # install wradlib
 RUN source activate wradlib && \
-    pip install https://github.com/wradlib/wradlib/archive/master.zip
+    pip install https://github.com/wradlib/wradlib/archive/v0.10.0.zip
 
 # configure startup
 CMD ["/usr/bin/xterm"]
