@@ -85,8 +85,7 @@ RUN source activate wradlib && \
     conda clean -tipy
 
 # Install wradlib
-ENV WRADLIB_VERSION 0.10.0
-ENV WRADLIB http://github.com/wradlib/wradlib/archive/v$WRADLIB_VERSION.zip
+ENV WRADLIB https://github.com/wradlib/wradlib/archive/master.zip
 RUN source activate wradlib && \
     pip install $WRADLIB
 
