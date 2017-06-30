@@ -69,7 +69,6 @@ RUN source activate wradlib && \
     sphinx \
     numpydoc \
     sphinx_rtd_theme \
-    runipy \
     pandoc \
     nbsphinx \
     flake8 \
