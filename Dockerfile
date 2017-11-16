@@ -52,9 +52,10 @@ RUN buildDeps="bzip2" && \
     conda update --all --yes && \
     conda clean -tipy
 
-# Install wradlib runtime dependencies
+# Install wradlib + runtime dependencies
 RUN conda create --yes -n wradlib \
     python=3.6 \
+    wradlib \
     gdal \
     numpy \
     scipy \
@@ -74,20 +75,29 @@ RUN source activate wradlib && \
     nbsphinx \
     flake8 \
     coverage \
+    codecov \
     unzip && \
     pip install sphinxcontrib-bibtex && \
-    pip install codecov && \
     conda clean -tipy
 
-# Install jupyter notebook
+# Install jupyter and dependencies
 RUN source activate wradlib && \
-    conda install --yes notebook && \
+    conda install --yes notebook \
+    jupyter \
+    jupyter_contrib_nbextensions && \
     conda clean -tipy
 
-# Install wradlib
-ENV WRADLIB https://github.com/wradlib/wradlib/archive/master.zip
+# Install additional dependencies
 RUN source activate wradlib && \
-    pip install $WRADLIB
+    conda install --yes opencv \
+    scikits-image && \
+    conda clean -tipy
+
+# Install qgis
+RUN conda create --yes -n qgis \
+    python=2.7 \
+    qgis && \
+    conda clean -tipy
 
 EXPOSE 8888 8889
 

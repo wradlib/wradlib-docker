@@ -9,7 +9,16 @@
 - x11 stack
 - su-exec
 
+## Where
+
+- branch `master`: python 3.6
+- branch `latest_py35`: python 3.5
+- branch `latest_py27`: python 2.7
+- branch `training`: special image for training purposes
+
 ## Build
+
+Checkout the wanted branch and issue:
 
 ```shell
 docker build -t wradlib .
@@ -18,7 +27,7 @@ docker build -t wradlib .
 ## Use
 
 ```shell
-$ docker run -i -t -p 8888:8888 -v /host/path/to/notebooks:/home/notebooks -v /host/path/to/wradlib-data:/home/wradlib-data -e WRADLIB_DATA=/home/wradlib-data wradlib:latest /opt/conda/envs/wradlib/bin/jupyter notebook --notebook-dir=/home/notebooks --ip='*' --port=8888 --no-browser
+$ docker run -i -t -p 8888:8888 -v /host/path/to/notebooks:/home/notebooks -v /host/path/to/wradlib-data:/home/wradlib-data -e WRADLIB_DATA=/home/wradlib-data wradlib:latest_py36 /opt/conda/envs/wradlib/bin/jupyter notebook --notebook-dir=/home/notebooks --ip='*' --port=8888 --no-browser
 ```
 
 This command starts a docker container with the following presets:
