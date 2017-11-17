@@ -90,6 +90,7 @@ RUN source activate wradlib && \
 # Install additional dependencies
 RUN source activate wradlib && \
     conda install --yes opencv \
+    pandas \
     scikit-image && \
     conda clean -tipy
 
