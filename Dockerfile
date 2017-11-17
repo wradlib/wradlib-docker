@@ -94,12 +94,6 @@ RUN source activate wradlib && \
     scikit-image && \
     conda clean -tipy
 
-# Install qgis
-RUN conda create --yes -n qgis \
-    python=2.7 \
-    qgis && \
-    conda clean -tipy
-
 EXPOSE 8888 8889
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
