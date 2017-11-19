@@ -55,7 +55,7 @@ RUN buildDeps="bzip2" && \
 # Install wradlib + runtime dependencies
 RUN conda create --yes -n wradlib \
     python=3.6 \
-    wradlib \
+    wradlib=0.11.* \
     gdal \
     numpy \
     scipy \
