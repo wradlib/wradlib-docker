@@ -1,33 +1,13 @@
-# wradlib using docker
+# wradlib-docker `basic` image
 
 ## What
 
 - centos:7 based docker image
-- miniconda3 python3.6 with dedicated wradlib environment
-- wradlib dependencies
-- notebook dependencies
-- x11 stack
+- basic x11 stack
 - su-exec
-
-## Build
-
-```shell
-docker build -t wradlib .
-```
+- miniconda3 4.3.11 python3.6
+- updated with conda-forge channel
 
 ## Use
 
-```shell
-$ docker run -i -t -p 8888:8888 -v /host/path/to/notebooks:/home/notebooks -v /host/path/to/wradlib-data:/home/wradlib-data -e WRADLIB_DATA=/home/wradlib-data wradlib:latest /opt/conda/envs/wradlib/bin/jupyter notebook --notebook-dir=/home/notebooks --ip='*' --port=8888 --no-browser
-```
-
-This command starts a docker container with the following presets:
-
-- open port 8888 for notebook server connections
-- mounts the host `/host/path/to/notebooks` to the `/home/notebooks` folder inside the container
-- mounts the host `/host/path/to/wradlib-data` to the `/home/wradlib-data` folder inside the container
-- set the `WRADLIB_DATA` environment variable pointing to the specified folder
-- start the notebook server
-
-
-The full HTTP address including authentification token will be prompted in the notebook server log on the screen. Just connect with your local browser and you are done.
+This image is just the base image from which the other wradlib images are build upon.

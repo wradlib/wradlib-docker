@@ -52,45 +52,6 @@ RUN buildDeps="bzip2" && \
     conda update --all --yes && \
     conda clean -tipy
 
-# Install wradlib runtime dependencies
-RUN conda create --yes -n wradlib \
-    python=3.6 \
-    gdal \
-    numpy \
-    scipy \
-    matplotlib \
-    netcdf4 \
-    h5py \
-    xmltodict && \
-    conda clean -tipy
-
-# Install wradlib build dependencies
-RUN source activate wradlib && \
-    conda install --yes nbconvert \
-    sphinx \
-    numpydoc \
-    sphinx_rtd_theme \
-    pandoc \
-    nbsphinx \
-    flake8 \
-    coverage \
-    unzip && \
-    pip install sphinxcontrib-bibtex && \
-    pip install codecov && \
-    conda clean -tipy
-
-# Install jupyter notebook
-RUN source activate wradlib && \
-    conda install --yes notebook && \
-    conda clean -tipy
-
-# Install wradlib
-ENV WRADLIB https://github.com/wradlib/wradlib/archive/master.zip
-RUN source activate wradlib && \
-    pip install $WRADLIB
-
-EXPOSE 8888 8889
-
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
