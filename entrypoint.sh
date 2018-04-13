@@ -2,7 +2,7 @@
 
 # add wradlib user
 USER_ID=${LOCAL_USER_ID:-9001}
-GROUP_ID=${LOCAL_GROUP_ID:-9001} 
+GROUP_ID=${LOCAL_GROUP_ID:-100} 
 USER_NAME=${LOCAL_USER_NAME:-wradlib}
 echo "Container USER_ID : $USER_ID"
 echo "Container GROUP_ID : $GROUP_ID"
