@@ -32,10 +32,10 @@ ENV SHELL /bin/bash
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 # Configure Miniconda3
-ENV MINICONDA_VER 4.5.4
+ENV MINICONDA_VER 4.5.11
 ENV MINICONDA Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 ENV MINICONDA_URL https://repo.continuum.io/miniconda/$MINICONDA
-ENV MINICONDA_MD5_SUM a946ea1d0c4a642ddf0c3a26a18bb16d
+ENV MINICONDA_MD5_SUM e1045ee415162f944b6aebfe560b8fee
 
 # Install Miniconda3
 RUN buildDeps="bzip2" && \
