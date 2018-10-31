@@ -5,7 +5,7 @@
 - centos:7 based docker image
 - basic x11 stack
 - su-exec
-- miniconda3 4.3.11 python3.6
+- miniconda3 4.5.11 python 3.7
 - updated with conda-forge channel
 
 ## Use
