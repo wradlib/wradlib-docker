@@ -50,7 +50,7 @@ RUN buildDeps="bzip2" && \
     conda config --set show_channel_urls True && \
     conda update conda && \
     conda config --add channels conda-forge && \
-    conda config --set channel_priority strict
+    conda config --set channel_priority strict && \
     conda update --all --yes && \
     conda clean -tipy
 
