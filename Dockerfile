@@ -48,7 +48,9 @@ RUN buildDeps="bzip2" && \
     yum clean all && \
     rm -rf /var/lib/yum/* && \
     conda config --set show_channel_urls True && \
+    conda update conda && \
     conda config --add channels conda-forge && \
+    conda config --set channel_priority strict
     conda update --all --yes && \
     conda clean -tipy
 
