@@ -32,10 +32,11 @@ ENV SHELL /bin/bash
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 # Configure Miniconda3
-ENV MINICONDA_VER 4.5.12
-ENV MINICONDA Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-ENV MINICONDA_URL https://repo.continuum.io/miniconda/$MINICONDA
-ENV MINICONDA_MD5_SUM 866ae9dff53ad0874e1d1a60b1ad1ef8
+ENV MINICONDA_VER 4.6.9
+ENV MINICONDA Miniconda3-$MINICONDA_VER.rc1-Linux-x86_64.sh
+# ENV MINICONDA_URL https://repo.continuum.io/miniconda/$MINICONDA
+ENV MINICONDA_URL https://repo.anaconda.com/pkgs/misc/previews/miniconda/$MINICONDA_VER/$MINICONDA
+ENV MINICONDA_MD5_SUM 121f634fe7b3cf00ede8abf6c1f21b9f
 
 # Install Miniconda3
 RUN buildDeps="bzip2" && \
@@ -48,7 +49,6 @@ RUN buildDeps="bzip2" && \
     yum clean all && \
     rm -rf /var/lib/yum/* && \
     conda config --set show_channel_urls True && \
-    conda update conda && \
     conda config --add channels conda-forge && \
     conda config --set channel_priority strict && \
     conda update --all --yes && \
