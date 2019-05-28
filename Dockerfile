@@ -34,8 +34,8 @@ ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 # Configure Miniconda3
 ENV MINICONDA_VER 4.6.14
 ENV MINICONDA Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-# ENV MINICONDA_URL https://repo.continuum.io/miniconda/$MINICONDA
-ENV MINICONDA_URL https://repo.anaconda.com/pkgs/misc/previews/miniconda/$MINICONDA_VER/$MINICONDA
+ENV MINICONDA_URL https://repo.continuum.io/miniconda/$MINICONDA
+#ENV MINICONDA_URL https://repo.anaconda.com/pkgs/misc/previews/miniconda/$MINICONDA_VER/$MINICONDA
 ENV MINICONDA_MD5_SUM 718259965f234088d785cad1fbd7de03
 
 # Install Miniconda3
