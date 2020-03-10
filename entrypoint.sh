@@ -14,6 +14,7 @@ useradd -s /bin/bash -m -u $USER_ID -g $GROUP_ID $USER_NAME
 export HOME=/home/$USER_NAME
 chown -R $USER_NAME $HOME
 chown -R $USER_NAME $CONDA_DIR
+echo ". /opt/conda/etc/profile.d/conda.sh" >> $HOME/.bashrc
 
 # use su-exec to run the process as wradlib
 su-exec $USER_NAME $@

@@ -52,8 +52,7 @@ RUN buildDeps="bzip2" && \
     conda config --add channels conda-forge && \
     conda config --set channel_priority strict && \
     conda update --all --yes && \
-    conda clean -tipy && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
+    conda clean -tipy
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
