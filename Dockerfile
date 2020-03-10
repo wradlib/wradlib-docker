@@ -32,11 +32,11 @@ ENV SHELL /bin/bash
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 # Configure Miniconda3
-ENV MINICONDA_VER 4.7.10
+ENV MINICONDA_VER 4.7.12.1
 ENV MINICONDA Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 ENV MINICONDA_URL https://repo.anaconda.com/miniconda/$MINICONDA
 #ENV MINICONDA_URL https://repo.anaconda.com/pkgs/misc/previews/miniconda/$MINICONDA_VER/$MINICONDA
-ENV MINICONDA_MD5_SUM 1c945f2b3335c7b2b15130b1b2dc5cf4
+ENV MINICONDA_MD5_SUM 81c773ff87af5cfac79ab862942ab6b3
 
 # Install Miniconda3
 RUN buildDeps="bzip2" && \
@@ -52,7 +52,8 @@ RUN buildDeps="bzip2" && \
     conda config --add channels conda-forge && \
     conda config --set channel_priority strict && \
     conda update --all --yes && \
-    conda clean -tipy
+    conda clean -tipy && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
