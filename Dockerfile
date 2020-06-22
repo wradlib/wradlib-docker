@@ -32,19 +32,18 @@ ENV SHELL /bin/bash
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 # Configure Miniconda3
-ENV MINICONDA_VER 4.7.12.1
-ENV MINICONDA Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
-ENV MINICONDA_URL https://repo.anaconda.com/miniconda/$MINICONDA
-#ENV MINICONDA_URL https://repo.anaconda.com/pkgs/misc/previews/miniconda/$MINICONDA_VER/$MINICONDA
-ENV MINICONDA_MD5_SUM 81c773ff87af5cfac79ab862942ab6b3
+ENV MINIFORGE_VER 4.8.3-4
+ENV MINIFORGE Miniforge3-${MINIFORGE_VER}-Linux-x86_64.sh
+ENV MINIFORGE_URL https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VER}/${MINIFORGE}
+ENV MINIFORGE_SHA256_SUM 24951262a126582f5f2e1cf82c9cd0fa20e936ef3309fdb8397175f29e647646
 
 # Install Miniconda3
 RUN buildDeps="bzip2" && \
     yum install -y ${buildDeps} && \
-    curl -LO $MINICONDA_URL && \
-    /bin/bash $MINICONDA -f -b -p $CONDA_DIR && \
-    echo "$MINICONDA_MD5_SUM  $MINICONDA" | md5sum -c && \
-    rm $MINICONDA && \
+    curl -LO ${MINIFORGE_URL} && \
+    /bin/bash ${MINIFORGE} -b -p ${CONDA_DIR} && \
+    echo "$MINIFORGE_SHA256_SUM  $MINIFORGE" | sha256sum -c && \
+    rm ${MINIFORGE} && \
     yum history -y undo last && \
     yum clean all && \
     rm -rf /var/lib/yum/* && \
@@ -52,7 +51,10 @@ RUN buildDeps="bzip2" && \
     conda config --add channels conda-forge && \
     conda config --set channel_priority strict && \
     conda update --all --yes && \
-    conda clean -tipy
+    conda clean -tipsy && \
+    find ${CONDA_DIR} -follow -type f -name '*.a' -delete && \
+    find ${CONDA_DIR} -follow -type f -name '*.pyc' -delete && \
+    conda clean -afy
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh

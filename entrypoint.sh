@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> /etc/skel/.bashrc
+echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> ~/.bashrc
+
 # add wradlib user
 USER_ID=${LOCAL_USER_ID:-9001}
 GROUP_ID=${LOCAL_GROUP_ID:-100} 
@@ -14,7 +17,6 @@ useradd -s /bin/bash -m -u $USER_ID -g $GROUP_ID $USER_NAME
 export HOME=/home/$USER_NAME
 chown -R $USER_NAME $HOME
 chown -R $USER_NAME $CONDA_DIR
-echo ". /opt/conda/etc/profile.d/conda.sh" >> $HOME/.bashrc
 
 # use su-exec to run the process as wradlib
 su-exec $USER_NAME $@
