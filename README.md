@@ -1,13 +1,14 @@
-# wradlib-docker `basic` image
+# wradlib-docker
 
-## What
+This repo consists of two docker files:
 
-- centos:7 based docker image
-- basic x11 stack
-- su-exec
-- miniconda3 4.5.11 python 3.7
-- updated with conda-forge channel
+- X.Y.Z-min
+    - based on `centos:7`
+    - basic x11 stack
+    - su-exec
+    - miniforge3 4.8.3-4
+    - with activated conda-forge wradlib environment
 
-## Use
-
-This image is just the base image from which the other wradlib images are build upon.
+- X.Y.Z-full
+    - based on `wradlib:X.Y.Z-min`
+    - added wradlib build dependencies + jupyter notebook

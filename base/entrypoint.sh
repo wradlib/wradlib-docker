@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate wradlib" >> /etc/skel/.bashrc
-echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate wradlib" >> ~/.bashrc
+echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> /etc/skel/.bashrc
+echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate base" >> ~/.bashrc
 
 # add wradlib user
 USER_ID=${LOCAL_USER_ID:-9001}
@@ -15,12 +15,8 @@ useradd -s /bin/bash -m -u $USER_ID -g $GROUP_ID $USER_NAME
 
 # chown home directory
 export HOME=/home/$USER_NAME
-
-mkdir $HOME/.jupyter
-echo "c.MultiKernelManager.default_kernel_name = 'wradlib'" >> $HOME/.jupyter/jupyter_notebook_config.py
-
-chown -R $USER_NAME:$GROUP_ID $HOME
-chown -R $USER_NAME:$GROUP_ID $CONDA_DIR
+chown -R $USER_NAME $HOME
+chown -R $USER_NAME $CONDA_DIR
 
 # use su-exec to run the process as wradlib
 su-exec $USER_NAME $@

@@ -1,0 +1,43 @@
+name: wradlib
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.8
+  - black
+  - bottleneck
+  - cartopy
+  - coverage
+  - codecov
+  - dask
+  - deprecation
+  - gdal
+  - git
+  - flake8
+  - h5py
+  - h5netcdf
+  - ipyparallel
+  - isort
+  - jupyter
+  - matplotlib
+  - nbconvert
+  - nbformat
+  - nbsphinx
+  - netCDF4
+  - notebook
+  - numpy
+  - pandoc
+  - psutil
+  - pytest
+  - pytest-cov
+  - pytest-sugar
+  - pytest-xdist
+  - requests
+  - scipy
+  - semver
+  - sphinx
+  - sphinxcontrib-bibtex
+  - sphinx_rtd_theme
+  - tqdm
+  - xarray
+  - xmltodict
