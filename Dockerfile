@@ -1,5 +1,5 @@
 ARG DOCKER_REPO
-FROM wradlib/{DOCKER_REPO}:base
+FROM wradlib/${DOCKER_REPO}:base
 
 MAINTAINER wradlib <wradlib@wradlib.org>
 
