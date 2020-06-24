@@ -1,0 +1,23 @@
+language: generic
+
+matrix:
+  include:
+    - os: linux
+      env:
+        - WRADLIB_VER=1.7.1
+
+jobs:
+  include:
+    - stage: build base image
+      script:
+        - cd base
+        - docker build -t wradlib/wradlib-docker:base .
+        - docker images
+    - stage: build min image
+      script:
+        - docker build -t wradlib/wradlib-docker:$WRADLIB_VER-min .
+        - docker images
+    - stage: build full image
+        script:
+          - docker build -t wradlib/wradlib-docker:$WRADLIB_VER-full .
+          - docker images
