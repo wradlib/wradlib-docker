@@ -1,4 +1,5 @@
-FROM wradlib/wradlib-docker:base
+ARG DOCKER_REPO
+FROM wradlib/{DOCKER_REPO}:base
 
 MAINTAINER wradlib <wradlib@wradlib.org>
 
