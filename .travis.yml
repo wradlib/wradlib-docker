@@ -1,10 +1,7 @@
-language: generic
+dist: trusty
 
-matrix:
-  include:
-    - os: linux
-      env:
-        - WRADLIB_VER=1.7.1
+env:
+  - WRADLIB_VER=1.7.1
 
 jobs:
   include:
