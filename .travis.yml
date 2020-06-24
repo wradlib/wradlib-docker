@@ -1,8 +1,7 @@
 dist: bionic
 
 env:
-  - WRADLIB_VER=1.7.1
-  - DOCKER_REPO=docker-test
+  - WRADLIB_VER=1.7.1 DOCKER_REPO=docker-test
 
 jobs:
   include:
@@ -16,8 +15,9 @@ jobs:
       script:
         - docker build --build-arg WRADLIB_VER --build-arg WRADLIB_DOCKER_TAG=min --build-arg DOCKER_REPO -t wradlib/$DOCKER_REPO:$WRADLIB_VER-min .
         - docker images
+        - docker login -u $DOCKER_ID -p $DOCKER_PW && docker push wradlib/$DOCKER_REPO:$WRADLIB_VER-min
     - stage: build full image
       script:
         - docker build --build-arg WRADLIB_VER --build-arg WRADLIB_DOCKER_TAG=full --build-arg DOCKER_REPO -t wradlib/$DOCKER_REPO:$WRADLIB_VER-full .
         - docker images
-        - docker login -u $DOCKER_ID -p $DOCKER_PW && docker push wradlib/$DOCKER_REPO:base
+        - docker login -u $DOCKER_ID -p $DOCKER_PW && docker push wradlib/$DOCKER_REPO:$WRADLIB_VER-full
