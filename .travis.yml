@@ -12,9 +12,9 @@ jobs:
         - docker images
     - stage: build min image
       script:
-        - docker build -t wradlib/wradlib-docker:$WRADLIB_VER-min .
+        - docker build --build-arg WRADLIB_VER --build-arg WRADLIB_DOCKER_TAG=min -t wradlib/wradlib-docker:$WRADLIB_VER-min .
         - docker images
     - stage: build full image
       script:
-        - docker build -t wradlib/wradlib-docker:$WRADLIB_VER-full .
+        - docker build --build-arg WRADLIB_VER --build-arg WRADLIB_DOCKER_TAG=full -t wradlib/wradlib-docker:$WRADLIB_VER-full .
         - docker images
