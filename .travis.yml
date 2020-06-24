@@ -18,6 +18,6 @@ jobs:
         - docker build -t wradlib/wradlib-docker:$WRADLIB_VER-min .
         - docker images
     - stage: build full image
-        script:
-          - docker build -t wradlib/wradlib-docker:$WRADLIB_VER-full .
-          - docker images
+      script:
+        - docker build -t wradlib/wradlib-docker:$WRADLIB_VER-full .
+        - docker images
