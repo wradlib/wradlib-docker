@@ -22,6 +22,8 @@ RUN python -m pip install ${WRADLIB} --no-deps --ignore-installed --no-cache-dir
 EXPOSE 8888 8889
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY start_docker.sh /usr/local/bin/start_docker.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/start_docker.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["/bin/bash"]

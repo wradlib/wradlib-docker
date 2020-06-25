@@ -23,5 +23,9 @@ chown -R ${USER_NAME}:${GROUP_ID} ${HOME}
 chown -R ${USER_NAME}:${GROUP_ID} ${CONDA_DIR}
 
 # use su-exec to run the process as wradlib
-echo $@
-su-exec ${USER_NAME} $@
+# use script to start specific commands
+if [[ "$1" != '/bin/bash' ]]; then
+    exec su-exec "${USER_NAME}" "/usr/local/bin/start_docker.sh" "$@"
+fi
+
+exec su-exec ${USER_NAME} "$@"
