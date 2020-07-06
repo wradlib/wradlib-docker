@@ -2,13 +2,19 @@
 
 This repo consists of two docker files:
 
-- X.Y.Z-min
+- base/Dockerfile
+    - builds the base image with the conda-forge installation (only if missing on docker-hub)
     - based on `centos:7`
     - basic x11 stack
     - su-exec
     - miniforge3 4.8.3-4
-    - with activated conda-forge wradlib environment
 
-- X.Y.Z-full
-    - based on `wradlib:X.Y.Z-min`
-    - added wradlib build dependencies + jupyter notebook
+- Dockerfile
+    - builds tags `min` and `full`
+    - builds wradlib releases (prepending `X.Y.Z`) on tagged builds as well as latest `master` (prepending `master`) on non-tagged builds (via `cron`)
+         - min
+            - based on `base`
+            - with activated conda-forge wradlib environment
+        - full
+            - based on `base`
+            - added wradlib build dependencies + jupyter notebook
