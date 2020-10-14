@@ -9,7 +9,7 @@ ENV WRL_DOCKER_TAG=${WRADLIB_DOCKER_TAG}
 COPY environment_${WRL_DOCKER_TAG}.yml .
 RUN conda run -n base conda install --quiet --yes nb_conda_kernels && \
     conda env create -f environment_${WRL_DOCKER_TAG}.yml && \
-    conda run -n wradlib ipython kernel install --user --name=wradlib && \
+    conda run -n wradlib ipykernel install --user --name=wradlib && \
     conda clean -tipy
 
 # Install wradlib
