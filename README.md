@@ -7,7 +7,7 @@ This repo consists of two docker files:
     - based on `centos:7`
     - basic x11 stack
     - su-exec
-    - miniforge3 4.8.3-4
+    - miniforge3 4.10.1-4
 
 - Dockerfile
     - builds tags `min` and `full`

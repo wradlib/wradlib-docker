@@ -1,0 +1,77 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [ master ]
+  release:
+    types:
+      - created
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: create base image
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    env:
+      DOCKER_REPO: wradlib-docker
+    strategy:
+      fail-fast: false
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: set release-tag env var
+      run: |
+        echo "WRADLIB_VERSION=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+        echo "fetch_status=`docker pull wradlib/${DOCKER_REPO}:base > /dev/null && echo 1 || echo 0`" >> $GITHUB_ENV
+    - name: check release-tag
+      run: |
+        echo wradlib_version "$WRADLIB_VERSION"
+        echo wradlib_version2 "$GITHUB_REF"
+        echo fetch_status "$fetch_status"
+    - name: build base image
+      env:
+        DOCKER_ID: ${{ secrets.DOCKER_ID }}
+        DOCKER_PW: ${{ secrets.DOCKER_PW }}
+      run: |
+        cd base
+        if [  "${fetch_status}" == "0" ]; then
+          docker build -t wradlib/$DOCKER_REPO:base .
+          docker images
+          echo "$DOCKER_PW" | docker login -u $DOCKER_ID --password-stdin
+          docker push wradlib/$DOCKER_REPO:base
+        fi
+    - name: add env vars
+      run: |
+        if [ "${WRADLIB_VERSION}" == "" ]; then
+          echo "WRADLIB_VERSION=master" >> $GITHUB_ENV
+        fi
+        echo "WRADLIB_DOCKER_TAG=min" >> $GITHUB_ENV
+    - name: build min image
+      env:
+        DOCKER_ID: ${{ secrets.DOCKER_ID }}
+        DOCKER_PW: ${{ secrets.DOCKER_PW }}
+      run: |
+        docker build --build-arg WRADLIB_VERSION --build-arg WRADLIB_DOCKER_TAG --build-arg DOCKER_REPO -t wradlib/$DOCKER_REPO:$WRADLIB_VERSION-${WRADLIB_DOCKER_TAG} .
+        docker images
+        echo "$DOCKER_PW" | docker login -u $DOCKER_ID --password-stdin
+        docker push wradlib/$DOCKER_REPO:$WRADLIB_VERSION-${WRADLIB_DOCKER_TAG}
+    - name: add env vars
+      run: |
+        if [ "${WRADLIB_VERSION}" == "" ]; then
+          echo "WRADLIB_VERSION=master" >> $GITHUB_ENV
+        fi
+        echo "WRADLIB_DOCKER_TAG=full" >> $GITHUB_ENV
+    - name: build full image
+      env:
+        DOCKER_ID: ${{ secrets.DOCKER_ID }}
+        DOCKER_PW: ${{ secrets.DOCKER_PW }}
+      run: |
+        docker build --build-arg WRADLIB_VERSION --build-arg WRADLIB_DOCKER_TAG --build-arg DOCKER_REPO -t wradlib/$DOCKER_REPO:$WRADLIB_VERSION-${WRADLIB_DOCKER_TAG} .
+        docker images
+        echo "$DOCKER_PW" | docker login -u $DOCKER_ID --password-stdin
+        docker push wradlib/$DOCKER_REPO:$WRADLIB_VERSION-${WRADLIB_DOCKER_TAG}

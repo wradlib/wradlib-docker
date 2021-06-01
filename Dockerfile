@@ -13,9 +13,9 @@ RUN conda run -n base conda install --quiet --yes nb_conda_kernels && \
     conda clean -tipy
 
 # Install wradlib
-ARG WRADLIB_VER
-ENV WRL_VER=$WRADLIB_VER
-ENV WRADLIB git+https://github.com/wradlib/wradlib.git@${WRL_VER}
+ARG WRADLIB_VERSION
+ENV WRL_VERSION=$WRADLIB_VERSION
+ENV WRADLIB git+https://github.com/wradlib/wradlib.git@${WRL_VERSION}
 SHELL ["conda", "run", "-n", "wradlib", "/bin/bash", "-c"]
 RUN python -m pip install ${WRADLIB} --no-deps --ignore-installed --no-cache-dir
 
