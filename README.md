@@ -11,7 +11,7 @@ This repo consists of two docker files:
 
 - Dockerfile
     - builds tags `min` and `full`
-    - builds wradlib releases (prepending `X.Y.Z`) on tagged builds as well as latest `master` (prepending `master`) on non-tagged builds (via `cron`)
+    - builds wradlib releases (prepending `X.Y.Z`) on tagged builds as well as latest `main` (prepending `main`) on non-tagged builds (via `cron`)
          - min
             - based on `base`
             - with activated conda-forge wradlib environment

@@ -15,8 +15,8 @@ RUN buildDeps="gcc \
                make" && \
     yum install -y ${buildDeps} && \
     DIR=$(mktemp -d) && cd ${DIR} && \
-    curl -LO https://github.com/ncopa/su-exec/archive/master.zip && \
-    unzip master.zip && cd su-exec-master && \
+    curl -LO https://github.com/ncopa/su-exec/archive/main.zip && \
+    unzip main.zip && cd su-exec-main && \
     make && \
     cp su-exec /usr/local/bin/su-exec && \
     cd / && \

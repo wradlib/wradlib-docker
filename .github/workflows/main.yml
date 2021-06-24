@@ -2,7 +2,7 @@ name: Build & Deploy
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   release:
     types:
       - created
@@ -48,7 +48,7 @@ jobs:
     - name: add env vars
       run: |
         if [ "${WRADLIB_VERSION}" == "" ]; then
-          echo "WRADLIB_VERSION=master" >> $GITHUB_ENV
+          echo "WRADLIB_VERSION=main" >> $GITHUB_ENV
         fi
         echo "WRADLIB_DOCKER_TAG=min" >> $GITHUB_ENV
     - name: build min image
@@ -63,7 +63,7 @@ jobs:
     - name: add env vars
       run: |
         if [ "${WRADLIB_VERSION}" == "" ]; then
-          echo "WRADLIB_VERSION=master" >> $GITHUB_ENV
+          echo "WRADLIB_VERSION=main" >> $GITHUB_ENV
         fi
         echo "WRADLIB_DOCKER_TAG=full" >> $GITHUB_ENV
     - name: build full image
